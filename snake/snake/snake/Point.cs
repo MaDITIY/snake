@@ -47,6 +47,11 @@ namespace snake
             }
         }
 
+        public bool Hit(Point p)
+        {
+            return p.x == x && p.y == y;
+        }
+
         public void Draw()
         {
             Console.SetCursorPosition(x, y);

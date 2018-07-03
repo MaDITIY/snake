@@ -40,6 +40,21 @@ namespace snake
             return next;
         }
 
+        internal bool HitTail()
+        {
+            var head = points.Last();
+
+            for(int i = 0; i < points.Count - 2; ++i)
+            {
+                if (head.Hit(points[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
         public void Handle(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
@@ -58,6 +73,18 @@ namespace snake
             {
                 direction = Direction.DOWN;
             }
+        }
+
+        internal bool Eat(Point food)
+        {
+            Point head = GetNext();
+            if (head.Hit(food))
+            {
+                food.sym = head.sym;
+                points.Add(food);
+                return true;
+            }
+            else return false;
         }
     }
 }
